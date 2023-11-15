@@ -1,3 +1,6 @@
+import { Button } from 'react-bootstrap';
+import React from 'react';
+import Link from 'next/link';
 import { useAuth } from '../utils/context/authContext';
 
 function Home() {
@@ -13,7 +16,12 @@ function Home() {
         margin: '0 auto',
       }}
     >
-      <h1>{user.displayName}, lets start building! </h1>
+      <h1>Time to start your adventure, {user.displayName}! </h1>
+      <div className="buttonWrapper">
+        <Link passHref href="/characters">
+          <Button variant="warning" className="indexBtn m-2">View Characters</Button>
+        </Link>
+      </div>
     </div>
   );
 }
