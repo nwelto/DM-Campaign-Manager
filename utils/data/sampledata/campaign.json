@@ -1,12 +1,14 @@
 {
   "-NirHP-kmzwVuT4j-LBO": {
     "name": "Realm of Legends",
-    "image": "",
-    "campaignId": ""
+    "image": "https://cdn2.unrealengine.com/the-wildest-lore-you-can-find-in-league-of-legends-1874x1080-7a664f7723e9.jpg",
+    "firebaseKey": "-NirHP-kmzwVuT4j-LBO",
+    "uid": "IWJIaYz1tYTysUhFvlqnNimwlt02"
   },
   "-NirHP-lbNoIUiBPtls9": {
     "name": "Rise of the Dragons",
-    "image": "",
-    "campaignId": ""
+    "image": "https://png.pngtree.com/background/20230614/original/pngtree-an-image-of-a-dragon-s-head-is-shown-picture-image_3520709.jpg",
+    "firebaseKey": "-NirHP-lbNoIUiBPtls9",
+    "uid": "IWJIaYz1tYTysUhFvlqnNimwlt02"
   }
 }

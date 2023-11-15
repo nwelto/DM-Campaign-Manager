@@ -20,8 +20,8 @@ const getCharacter = (uid) => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
-const getCharactersByTeam = (firebaseKey) => new Promise((resolve, reject) => {
-  fetch(`${endpoint}/characters.json?orderBy=team_id"&equalTo="${firebaseKey}"`, {
+const getCharactersByCampaign = (firebaseKey) => new Promise((resolve, reject) => {
+  fetch(`${endpoint}/characters.json?orderBy=campaign_id"&equalTo="${firebaseKey}"`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
@@ -105,5 +105,5 @@ export {
   deleteCharacter,
   updateCharacters,
   favoriteCharacters,
-  getCharactersByTeam,
+  getCharactersByCampaign,
 };

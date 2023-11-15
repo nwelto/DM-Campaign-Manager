@@ -4,7 +4,7 @@ import { getSingleCharacter, deleteCharacter } from './characterData';
 const viewCharacterDetails = (characterFirebaseKey) => new Promise((resolve, reject) => {
   getSingleCharacter(characterFirebaseKey)
     .then((characterObject) => {
-      getSingleCampaign(characterObject.team_id)
+      getSingleCampaign(characterObject.campaign_id)
         .then((campaignObject) => {
           resolve({ campaignObject, ...characterObject });
         });
