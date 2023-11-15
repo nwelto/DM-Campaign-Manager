@@ -2,6 +2,7 @@
   "-NirG96JXzPulMkCCkNj": {
     "AC": 14,
     "HP": 15,
+    "uid": "IWJIaYz1tYTysUhFvlqnNimwlt02",
     "name": "Adrianne Bidder",
     "image": "https://robohash.org/quisquamsuntvoluptatibus.png?size=50x50&set=set1",
     "wisdom": 17,
@@ -13,12 +14,13 @@
     "passive_perception": 5,
     "investigation": 9,
     "insight": 1,
-    "characterId": "",
+    "firebaseKey": "-NirG96JXzPulMkCCkNj",
     "class": "Ranger"
   },
   "-NirG96MHh2QC7KDybj1": {
     "AC": 12,
     "HP": 63,
+    "uid": "IWJIaYz1tYTysUhFvlqnNimwlt02",
     "name": "Jacquelyn Kersley",
     "image": "https://robohash.org/earumnumquamut.png?size=50x50&set=set1",
     "wisdom": 20,
@@ -30,12 +32,13 @@
     "passive_perception": 14,
     "investigation": 4,
     "insight": 2,
-    "characterId": "",
+    "firebaseKey": "-NirG96MHh2QC7KDybj1",
     "class": "Fighter"
   },
   "-NirG96P0bdRG-P-C-u3": {
     "AC": 14,
     "HP": 77,
+    "uid": "IWJIaYz1tYTysUhFvlqnNimwlt02",
     "name": "Jesus Fourmy",
     "image": "https://robohash.org/estutcorrupti.png?size=50x50&set=set1",
     "wisdom": 6,
@@ -47,12 +50,13 @@
     "passive_perception": 4,
     "investigation": 20,
     "insight": 16,
-    "characterId": "",
+    "firebaseKey": "-NirG96P0bdRG-P-C-u3",
     "class": "Warlock"
   },
   "-NirG96SvdxX-EumxH66": {
     "AC": 18,
     "HP": 91,
+    "uid": "IWJIaYz1tYTysUhFvlqnNimwlt02",
     "name": "Rollie Boutcher",
     "image": "https://robohash.org/praesentiumeiusnecessitatibus.png?size=50x50&set=set1",
     "wisdom": 2,
@@ -64,7 +68,7 @@
     "passive_perception": 13,
     "investigation": 14,
     "insight": 11,
-    "characterId": "",
+    "firebaseKey": "-NirG96SvdxX-EumxH66",
     "class": "Bard"
   }
 }
