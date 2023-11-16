@@ -3,18 +3,18 @@ import { getSingleCharacter, deleteCharacter } from './characterData';
 
 const viewCharacterDetails = (characterFirebaseKey) => new Promise((resolve, reject) => {
   getSingleCharacter(characterFirebaseKey)
-    .then((characterObject) => {
-      getSingleCampaign(characterObject.campaign_id)
-        .then((campaignObject) => {
-          resolve({ campaignObject, ...characterObject });
+    .then((characterObj) => {
+      getSingleCampaign(characterObj.campaign_id)
+        .then((campaignObj) => {
+          resolve({ campaignObj, ...characterObj });
         });
     }).catch((error) => reject(error));
 });
 
 const viewCampaignDetails = (campaignFirebaseKey) => new Promise((resolve, reject) => {
   Promise.all([getSingleCampaign(campaignFirebaseKey), getCampaignCharacters(campaignFirebaseKey)])
-    .then(([campaignObject, campaignCharactersArray]) => {
-      resolve({ ...campaignObject, characterss: campaignCharactersArray });
+    .then(([campaignObj, campaignCharactersArray]) => {
+      resolve({ ...campaignObj, characters: campaignCharactersArray });
     }).catch((error) => reject(error));
 });
 

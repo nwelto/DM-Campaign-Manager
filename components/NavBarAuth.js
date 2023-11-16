@@ -30,6 +30,9 @@ export default function NavBarAuth() {
             <Link passHref href="/characters">
               <Nav.Link>Characters</Nav.Link>
             </Link>
+            <Link passHref href="/character/new">
+              <Nav.Link>New Characters</Nav.Link>
+            </Link>
             <Link passHref href="/campaigns">
               <Nav.Link>Campaigns</Nav.Link>
             </Link>

@@ -24,7 +24,7 @@ function ShowCharacters() {
     <div className="text-center my-4">
       <div className="d-flex flex-wrap">
         {characterDetails.map((character) => (
-          <CharacterCard key={character.firebaseKey} characterObj={character} campaignName={character.campaignObject?.name} onUpdate={getAllCharacters} />
+          <CharacterCard key={character.firebaseKey} characterObj={character} campaignName={character.campaignObj?.name} onUpdate={getAllCharacters} />
         ))}
       </div>
     </div>
