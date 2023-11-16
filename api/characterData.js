@@ -34,7 +34,7 @@ const getCharactersByCampaign = (firebaseKey) => new Promise((resolve, reject) =
 
 const createCharacter = (payload) => new Promise((resolve, reject) => {
   console.warn('Payload to createCharacter', payload);
-  fetch(`${endpoint}/Characters.json`, {
+  fetch(`${endpoint}/characters.json`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',

@@ -14,9 +14,9 @@ function CampaignCard({ campaignObj, onUpdate }) {
 
   return (
     <Card style={{ width: '18rem', margin: '10px' }}>
+      <Card.Title>{campaignObj.name}</Card.Title>
       <Card.Img variant="top" src={campaignObj.image} style={{ height: '400px' }} />
       <Card.Body>
-        <Card.Title>{campaignObj.name}</Card.Title>
         <Link href={`/campaign/${campaignObj.firebaseKey}`} passHref>
           <Button variant="dark" className="m-2">VIEW</Button>
         </Link>
