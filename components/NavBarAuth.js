@@ -36,6 +36,9 @@ export default function NavBarAuth() {
             <Link passHref href="/campaigns">
               <Nav.Link>Campaigns</Nav.Link>
             </Link>
+            <Link passHref href="/campaign/new">
+              <Nav.Link>New Campaigns</Nav.Link>
+            </Link>
             <Button variant="danger" onClick={signOut}>Sign Out</Button>
           </Nav>
         </Navbar.Collapse>

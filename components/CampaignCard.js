@@ -13,7 +13,7 @@ function CampaignCard({ campaignObj, onUpdate }) {
   };
 
   return (
-    <Card style={{ width: '18rem', margin: '10px' }}>
+    <Card style={{ width: '80rem', margin: '10px' }}>
       <Card.Title>{campaignObj.name}</Card.Title>
       <Card.Img variant="top" src={campaignObj.image} style={{ height: '400px' }} />
       <Card.Body>

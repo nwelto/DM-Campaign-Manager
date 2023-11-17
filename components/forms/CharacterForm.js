@@ -47,10 +47,9 @@ function CharacterForm({ obj }) {
     }));
 
     if (name === 'campaign_id') {
-      const selectedcampaign = campaigns.find((campaign) => campaign.firebaseKey === value);
       setFormInput((prevState) => ({
         ...prevState,
-        name: selectedcampaign ? selectedcampaign.name : '',
+        campaign_id: value,
       }));
     }
   };
@@ -199,9 +198,9 @@ function CharacterForm({ obj }) {
       <FloatingLabel controlId="floatingInput2" label="Passive Perception" className="mb-3">
         <Form.Control
           type="number"
-          aria-label="Passive Perception"
-          name="perception"
-          value={formInput.perception}
+          aria-label="passive"
+          name="passive_perception"
+          value={formInput.passive_perception}
           onChange={handleChange}
           required
         />
@@ -210,7 +209,7 @@ function CharacterForm({ obj }) {
       <FloatingLabel controlId="floatingInput2" label="Passive Investigation" className="mb-3">
         <Form.Control
           type="number"
-          aria-label="Passive Investigation"
+          aria-label="investigation"
           name="investigation"
           value={formInput.investigation}
           onChange={handleChange}
@@ -221,7 +220,7 @@ function CharacterForm({ obj }) {
       <FloatingLabel controlId="floatingInput2" label="Passive Insight" className="mb-3">
         <Form.Control
           type="number"
-          aria-label="Passive Insight"
+          aria-label="insight"
           name="insight"
           value={formInput.insight}
           onChange={handleChange}
