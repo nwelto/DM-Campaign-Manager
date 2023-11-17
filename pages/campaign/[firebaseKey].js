@@ -21,7 +21,7 @@ export default function ViewCampaigns() {
   return (
     <div className="mt-5 d-flex flex-wrap">
       <div className="d-flex flex-column">
-        <img src={campaignDetails.image} alt={campaignDetails.name} style={{ width: '800px' }} />
+        <img src={campaignDetails.image} alt={campaignDetails.name} style={{ width: '400px' }} />
       </div>
       <div className="text-white ms-5 details">
         <h5 style={{ fontSize: '3em' }}>{campaignDetails.name} </h5>

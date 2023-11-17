@@ -47,10 +47,9 @@ function CharacterForm({ obj }) {
     }));
 
     if (name === 'campaign_id') {
-      const selectedcampaign = campaigns.find((campaign) => campaign.firebaseKey === value);
       setFormInput((prevState) => ({
         ...prevState,
-        name: selectedcampaign ? selectedcampaign.name : '',
+        campaign_id: value,
       }));
     }
   };
