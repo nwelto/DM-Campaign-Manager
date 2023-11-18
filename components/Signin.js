@@ -14,15 +14,20 @@ function Signin() {
     <div
       className="text-center d-flex flex-column justify-content-center align-content-center"
       style={{
-        height: '90vh',
+        width: '100vw',
+        height: '100vh',
         padding: '30px',
-        maxWidth: '400px',
         margin: '0 auto',
+        backgroundImage: 'url("/dmcbbr3.png")',
+        backgroundSize: 'cover',
+        backgroundRepeat: 'no-repeat',
+        backgroundPosition: 'center',
+        boxSizing: 'border-box',
       }}
     >
-      <h1>Hi there!</h1>
-      <p>Click the button below to login!</p>
-      <Button type="button" size="lg" className="copy-btn" onClick={handleSignIn}>
+      <h1 style={{ color: 'white' }}>Welcome.</h1>
+      <p style={{ color: 'white' }}>Please sign in to continue.</p>
+      <Button type="button" size="lg" className="signin-btn" onClick={handleSignIn}>
         Sign In
       </Button>
     </div>

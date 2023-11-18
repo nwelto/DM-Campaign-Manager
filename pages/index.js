@@ -21,6 +21,9 @@ function Home() {
         <Link passHref href="/characters">
           <Button variant="warning" className="indexBtn m-2">View Characters</Button>
         </Link>
+        <Link passHref href="/campaigns">
+          <Button variant="warning" className="indexBtn m-2">View Campaigns</Button>
+        </Link>
       </div>
     </div>
   );
