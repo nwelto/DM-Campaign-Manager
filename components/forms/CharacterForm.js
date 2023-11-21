@@ -235,7 +235,6 @@ function CharacterForm({ obj }) {
           name="notes"
           value={formInput.notes}
           onChange={handleChange}
-          required
         />
       </FloatingLabel>
 

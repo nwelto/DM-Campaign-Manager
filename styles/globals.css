@@ -32,15 +32,17 @@ body {
   margin: 0 auto;
   background-color: transparent; 
   color: white; 
-  border: 0px solid transparent; 
+  border: 10px solid transparent; 
   padding: 10px 20px;
   font-size: 16px; 
   cursor: pointer; 
   transition: all 0.3s ease; 
   font-weight: bolder;
+  border-radius: 0;
 }
 
 .signin-btn:hover {
   border: 10px solid white; 
   background-color: transparent; 
+  border-radius: 0;
 }
