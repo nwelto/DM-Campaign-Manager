@@ -1,32 +1,72 @@
-import { Button } from 'react-bootstrap';
+import { Card } from 'react-bootstrap';
 import React from 'react';
 import Link from 'next/link';
-import { useAuth } from '../utils/context/authContext';
 
 function Home() {
-  const { user } = useAuth();
-
   return (
     <div
-      className="text-center d-flex flex-column justify-content-center align-content-center"
+      className="text-center d-flex flex-column justify-content-center align-items-center"
       style={{
-        height: '90vh',
+        height: '100vh',
         padding: '30px',
-        maxWidth: '400px',
+        width: '100%',
         margin: '0 auto',
       }}
     >
-      <h1>Time to start your adventure, {user.displayName}! </h1>
-      <div className="buttonWrapper">
+
+      <div className="d-flex flex-row justify-content-around align-items-stretch" style={{ width: '100%' }}>
         <Link passHref href="/characters">
-          <Button variant="warning" className="indexBtn m-2">View Characters</Button>
+          <Card
+            id="charactersCard"
+            className="cardHover"
+            style={{
+              backgroundImage: 'url(1.png)',
+              backgroundSize: 'cover',
+              backgroundPosition: 'center',
+              backgroundRepeat: 'no-repeat',
+              backgroundColor: 'transparent',
+              flexGrow: 5,
+              height: '600px',
+              cursor: 'pointer',
+              margin: '0 10px',
+            }}
+          >
+            <Card.Body className="d-flex justify-content-center align-items-center">
+              <Card.Title style={{
+                fontWeight: '800', fontSize: '24px', color: '#FFFFFF', textShadow: '3px 3px 6px #000000',
+              }}
+              >View Characters
+              </Card.Title>
+            </Card.Body>
+          </Card>
         </Link>
         <Link passHref href="/campaigns">
-          <Button variant="warning" className="indexBtn m-2">View Campaigns</Button>
+          <Card
+            id="campaignsCard"
+            className="cardHover"
+            style={{
+              backgroundImage: 'url(2.png)',
+              backgroundSize: 'cover',
+              backgroundPosition: 'center',
+              backgroundRepeat: 'no-repeat',
+              backgroundColor: 'transparent',
+              flexGrow: 5,
+              height: '600px',
+              cursor: 'pointer',
+              margin: '0 10px',
+            }}
+          >
+            <Card.Body className="d-flex justify-content-center align-items-center">
+              <Card.Title style={{
+                fontWeight: '800', fontSize: '24px', color: '#FFFFFF', textShadow: '3px 3px 6px #000000',
+              }}
+              >View Campaigns
+              </Card.Title>
+            </Card.Body>
+          </Card>
         </Link>
       </div>
     </div>
   );
 }
-
 export default Home;
