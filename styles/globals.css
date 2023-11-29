@@ -18,9 +18,7 @@ a {
 }
 
 body {
-  background-image: url('/fire.png');
-  background-size: cover;
-  background-repeat: no-repeat;
+background-color: black;
 }
 
 .card {
@@ -50,7 +48,22 @@ body {
 }
 
 .cardHover:hover {
-  transform: translateY(-5px) scale(1.10); 
+  transform: translateY(-5px) scale(1.00); 
   box-shadow: 0 5px 5px rgba(0, 0, 0, 0.15); 
   transition: transform 0.3s ease, box-shadow 0.3s ease; 
+}
+
+.custom-dropdown .dropdown-menu {
+  background-color: black;
+  color: white;
+}
+
+.custom-dropdown .dropdown-item {
+  color: white;
+}
+
+
+.custom-dropdown .dropdown-item:hover {
+  background-color: #333;
+  color: white;
 }

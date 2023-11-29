@@ -3,7 +3,7 @@
 import React from 'react';
 import Link from 'next/link';
 import {
-  Navbar, Container, Nav, Button,
+  Navbar, Container, Nav, Button, NavDropdown,
 } from 'react-bootstrap';
 import { signOut } from '../utils/auth';
 
@@ -26,21 +26,24 @@ export default function NavBarAuth() {
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="me-auto">
-            {/* CLOSE NAVBAR ON LINK SELECTION: https://stackoverflow.com/questions/72813635/collapse-on-select-react-bootstrap-navbar-with-nextjs-not-working */}
-            <Link passHref href="/characters">
-              <Nav.Link>Characters</Nav.Link>
-            </Link>
-            <Link passHref href="/character/new">
-              <Nav.Link>New Characters</Nav.Link>
-            </Link>
-            <Link passHref href="/campaigns">
-              <Nav.Link>Campaigns</Nav.Link>
-            </Link>
-            <Link passHref href="/campaign/new">
-              <Nav.Link>New Campaigns</Nav.Link>
-            </Link>
-            <Button variant="danger" onClick={signOut}>Sign Out</Button>
+            <NavDropdown title="Characters" id="nav-dropdown-characters" className="custom-dropdown">
+              <Link href="/characters" passHref>
+                <NavDropdown.Item as="a">View Characters</NavDropdown.Item>
+              </Link>
+              <Link href="/character/new" passHref>
+                <NavDropdown.Item as="a">New Character</NavDropdown.Item>
+              </Link>
+            </NavDropdown>
+            <NavDropdown title="Campaigns" id="nav-dropdown-campaigns" className="custom-dropdown">
+              <Link href="/campaigns" passHref>
+                <NavDropdown.Item as="a">View Campaigns</NavDropdown.Item>
+              </Link>
+              <Link href="/campaign/new" passHref>
+                <NavDropdown.Item as="a">New Campaign</NavDropdown.Item>
+              </Link>
+            </NavDropdown>
           </Nav>
+          <Button variant="danger" onClick={signOut}>Sign Out</Button>
         </Navbar.Collapse>
       </Container>
     </Navbar>
