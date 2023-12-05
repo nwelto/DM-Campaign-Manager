@@ -42,6 +42,9 @@ export default function NavBarAuth() {
                 <NavDropdown.Item as="a">New Campaign</NavDropdown.Item>
               </Link>
             </NavDropdown>
+            <Link href="/graveyard/-NkrRAasWnac7AfGXqdA" passHref>
+              <Nav.Link as="a">Graveyard</Nav.Link>
+            </Link>
           </Nav>
           <Button variant="danger" onClick={signOut}>Sign Out</Button>
         </Navbar.Collapse>

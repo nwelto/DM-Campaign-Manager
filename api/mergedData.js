@@ -1,5 +1,6 @@
 import { getCampaignCharacters, getSingleCampaign, deleteSingleCampaign } from './campaignData';
 import { getSingleCharacter, deleteCharacter } from './characterData';
+import { getGraveyardCharacters, getSingleGraveyard } from './graveData';
 
 const viewCharacterDetails = (characterFirebaseKey) => new Promise((resolve, reject) => {
   getSingleCharacter(characterFirebaseKey)
@@ -18,6 +19,13 @@ const viewCampaignDetails = (campaignFirebaseKey) => new Promise((resolve, rejec
     }).catch((error) => reject(error));
 });
 
+const viewGraveyardDetails = (graveyardFirebaseKey) => new Promise((resolve, reject) => {
+  Promise.all([getSingleGraveyard(graveyardFirebaseKey), getGraveyardCharacters(graveyardFirebaseKey)])
+    .then(([graveyardObj, graveyardCharactersArray]) => {
+      resolve({ ...graveyardObj, characters: graveyardCharactersArray });
+    }).catch((error) => reject(error));
+});
+
 const deleteCampaignCharacters = (campaignId) => new Promise((resolve, reject) => {
   getCampaignCharacters(campaignId).then((charactersArray) => {
     const deleteCharacterPromises = charactersArray.map((character) => deleteCharacter(character.firebaseKey));
@@ -29,5 +37,5 @@ const deleteCampaignCharacters = (campaignId) => new Promise((resolve, reject) =
 });
 
 export {
-  viewCharacterDetails, viewCampaignDetails, deleteCampaignCharacters,
+  viewCharacterDetails, viewCampaignDetails, deleteCampaignCharacters, viewGraveyardDetails,
 };

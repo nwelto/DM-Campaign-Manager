@@ -10,10 +10,6 @@ export default function ViewCampaigns() {
 
   const { firebaseKey } = router.query;
 
-  const getCampaignDetails = () => {
-    viewCampaignDetails(firebaseKey).then(setCampaignDetails);
-  };
-
   useEffect(() => {
     viewCampaignDetails(firebaseKey).then(setCampaignDetails);
   }, [firebaseKey]);
@@ -27,7 +23,7 @@ export default function ViewCampaigns() {
         <h5 style={{ fontSize: '3em' }}>{campaignDetails.name} </h5>
       </div>
       <div className="cardContainer d-flex flex-wrap">{campaignDetails.characters?.map((character) => (
-        <CharacterCard key={character.firebaseKey} characterObj={character} campaignName={campaignDetails.name} onUpdate={getCampaignDetails} />
+        <CharacterCard key={character.firebaseKey} characterObj={character} campaignName={campaignDetails.name} onUpdate={viewCampaignDetails} />
       ))}
       </div>
     </div>
