@@ -22,6 +22,7 @@ const initialState = {
   wisdom: '',
   cha: '',
   campaign_id: '',
+  graveyard_id: '',
   passive_perception: '',
   investigation: '',
   insight: '',
@@ -41,30 +42,23 @@ function CharacterForm({ obj }) {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
+
     setFormInput((prevState) => ({
       ...prevState,
       [name]: value,
+      ...(name === 'campaign_id' && value && { graveyard_id: '' }),
     }));
-
-    if (name === 'campaign_id') {
-      setFormInput((prevState) => ({
-        ...prevState,
-        campaign_id: value,
-      }));
-    }
   };
 
   const handleSubmit = (e) => {
-    console.warn('handlesubmit triggered');
     e.preventDefault();
     if (obj.firebaseKey) {
-      updateCharacters(formInput).then(() => router.back()); // Go back to the previous page
+      updateCharacters(formInput).then(() => router.back());
     } else {
       const payload = { ...formInput, uid: user.uid };
-      createCharacter(payload).then(({ name }) => {
-        const patchPayload = { firebaseKey: name };
-        updateCharacters(patchPayload).then(() => {
-          router.back(); // Go back to the previous page
+      createCharacter(payload).then(({ firebaseKey }) => {
+        updateCharacters({ ...formInput, firebaseKey }).then(() => {
+          router.back();
         });
       });
     }
@@ -285,6 +279,8 @@ CharacterForm.propTypes = {
     passive_perception: PropTypes.number,
     investigation: PropTypes.number,
     insight: PropTypes.number,
+    campaign_id: PropTypes.string,
+    graveyard_id: PropTypes.string,
   }),
 };
 
