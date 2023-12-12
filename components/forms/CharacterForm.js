@@ -58,13 +58,13 @@ function CharacterForm({ obj }) {
     console.warn('handlesubmit triggered');
     e.preventDefault();
     if (obj.firebaseKey) {
-      updateCharacters(formInput).then(() => router.back()); // Go back to the previous page
+      updateCharacters(formInput).then(() => router.back());
     } else {
       const payload = { ...formInput, uid: user.uid };
       createCharacter(payload).then(({ name }) => {
         const patchPayload = { firebaseKey: name };
         updateCharacters(patchPayload).then(() => {
-          router.back(); // Go back to the previous page
+          router.back();
         });
       });
     }
@@ -235,7 +235,6 @@ function CharacterForm({ obj }) {
           name="notes"
           value={formInput.notes}
           onChange={handleChange}
-          required
         />
       </FloatingLabel>
 

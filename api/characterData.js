@@ -20,18 +20,6 @@ const getCharacter = (uid) => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
-const getCharactersByCampaign = (firebaseKey) => new Promise((resolve, reject) => {
-  fetch(`${endpoint}/characters.json?orderBy=campaign_id"&equalTo="${firebaseKey}"`, {
-    method: 'GET',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-  })
-    .then((response) => response.json())
-    .then((data) => resolve(Object.values(data)))
-    .catch(reject);
-});
-
 const createCharacter = (payload) => new Promise((resolve, reject) => {
   console.warn('Payload to createCharacter', payload);
   fetch(`${endpoint}/characters.json`, {
@@ -105,5 +93,5 @@ export {
   deleteCharacter,
   updateCharacters,
   favoriteCharacters,
-  getCharactersByCampaign,
+
 };

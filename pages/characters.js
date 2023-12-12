@@ -6,12 +6,13 @@ import CharacterCard from '../components/CharacterCard';
 
 function ShowCharacters() {
   const [characterDetails, setCharacterDetails] = useState([]);
-
   const { user } = useAuth();
 
   const getAllCharacters = () => {
     getCharacter(user.uid).then((characterList) => {
-      Promise.all(characterList.map((character) => viewCharacterDetails(character.firebaseKey)))
+      const livingCharacters = characterList.filter((character) => !character.isDead);
+
+      Promise.all(livingCharacters.map((character) => viewCharacterDetails(character.firebaseKey)))
         .then(setCharacterDetails);
     });
   };
