@@ -1,6 +1,6 @@
 import { getCampaignCharacters, getSingleCampaign, deleteSingleCampaign } from './campaignData';
 import { getSingleCharacter, deleteCharacter } from './characterData';
-import { getGraveyardCharacters, getSingleGraveyard } from './graveData';
+import { getDeadCharacters } from './graveData';
 
 const viewCharacterDetails = (characterFirebaseKey) => new Promise((resolve, reject) => {
   getSingleCharacter(characterFirebaseKey)
@@ -19,10 +19,10 @@ const viewCampaignDetails = (campaignFirebaseKey) => new Promise((resolve, rejec
     }).catch((error) => reject(error));
 });
 
-const viewGraveyardDetails = (graveyardFirebaseKey) => new Promise((resolve, reject) => {
-  Promise.all([getSingleGraveyard(graveyardFirebaseKey), getGraveyardCharacters(graveyardFirebaseKey)])
-    .then(([graveyardObj, graveyardCharactersArray]) => {
-      resolve({ ...graveyardObj, characters: graveyardCharactersArray });
+const viewGraveyardDetails = () => new Promise((resolve, reject) => {
+  getDeadCharacters()
+    .then((deadCharactersArray) => {
+      resolve({ characters: deadCharactersArray });
     }).catch((error) => reject(error));
 });
 

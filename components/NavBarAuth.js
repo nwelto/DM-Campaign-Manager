@@ -9,7 +9,7 @@ import { signOut } from '../utils/auth';
 
 export default function NavBarAuth() {
   return (
-    <Navbar id="navBar" collapseOnSelect expand="lg" bg="dark" variant="dark">
+    <Navbar id="navBar" collapseOnSelect expand="lg" bg="dark" variant="dark" style={{ position: 'sticky', top: 0, zIndex: 1020 }}>
       <Container>
         <Navbar.Brand>
           <img
@@ -42,7 +42,7 @@ export default function NavBarAuth() {
                 <NavDropdown.Item as="a">New Campaign</NavDropdown.Item>
               </Link>
             </NavDropdown>
-            <Link href="/graveyard/-NkrRAasWnac7AfGXqdA" passHref>
+            <Link href="/graveyards" passHref>
               <Nav.Link as="a">Graveyard</Nav.Link>
             </Link>
           </Nav>

@@ -72,7 +72,7 @@ function Home() {
       </div>
 
       <div className="d-flex justify-content-center align-items-center" style={{ width: '100%', marginTop: '10px' }}>
-        <Link passHref href="/graveyard/-NkrRAasWnac7AfGXqdA">
+        <Link passHref href="/graveyards">
           <Card
             id="graveyardCard"
             className="cardHover"

@@ -18,7 +18,7 @@
     "class": "Ranger",
     "campaign_id": "",
     "notes": "This character is amazing and I love them.",
-    "graveyard_id": "-NkrRAasWnac7AfGXqdA"
+    "isDead": true
   },
   "-NirG96MHh2QC7KDybj1": {
     "ac": 12,
@@ -39,7 +39,7 @@
     "class": "Fighter",
     "campaign_id": "-NirHP-kmzwVuT4j-LBO",
     "notes": "This character is amazing and I love them.",
-    "graveyard_id": ""
+    "isDead": false
   },
   "-NirG96P0bdRG-P-C-u3": {
     "ac": 14,
@@ -60,7 +60,7 @@
     "class": "Warlock",
     "campaign_id": "-NirHP-kmzwVuT4j-LBO",
     "notes": "This character is amazing and I love them.",
-    "graveyard_id": ""
+    "isDead": false
   },
   "-NirG96SvdxX-EumxH66": {
     "ac": 18,
@@ -81,6 +81,6 @@
     "class": "Bard",
     "campaign_id": "-NirHP-kmzwVuT4j-LBO",
     "notes": "This character is amazing and I love them.",
-    "graveyard_id": ""
+    "isDead": false
   }
 }

@@ -1,34 +1,32 @@
+/* eslint-disable @next/next/no-img-element */
+import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
-import { useAuth } from '../utils/context/authContext';
-import { getGraveyard } from '../api/graveData';
-import GraveyardCard from '../components/GraveyardCard';
+import { viewGraveyardDetails } from '../api/mergedData';
+import CharacterCard from '../components/CharacterCard';
 
-function ShowGraveyard() {
-  const [graveyards, setGraveyard] = useState([]);
+export default function ViewGraveyard() {
+  const [graveyardDetails, setGraveyardDetails] = useState({});
+  const router = useRouter();
 
-  const { user } = useAuth();
-
-  const getAllGraveyard = () => {
-    getGraveyard(user.uid).then((data) => {
-      console.warn('Fetched Graveyard Data:', data);
-      setGraveyard(data);
-    });
-  };
+  const { firebaseKey } = router.query;
 
   useEffect(() => {
-    getAllGraveyard();
-  }, []);
+    viewGraveyardDetails(firebaseKey).then(setGraveyardDetails);
+  }, [firebaseKey]);
 
   return (
-    <div className="text-center my-4">
-      <div className="d-flex flex-wrap">
-        {graveyards.map((graveyard) => (
-          <GraveyardCard key={graveyard.firebaseKey} graveyardObj={graveyard} onUpdate={getAllGraveyard} />
-        ))}
+    <div className="mt-5 d-flex flex-wrap">
+      <div className="d-flex flex-column">
+        <img src="/graveyard.png" alt="Graveyard" style={{ width: '100%', height: '200px' }} />
       </div>
-
+      <div className="text-white ms-5 details">
+        <h5 style={{ fontSize: '3em' }}>{graveyardDetails.name} </h5>
+      </div>
+      <div className="cardContainer d-flex flex-wrap">{graveyardDetails.characters?.map((character) => (
+        <CharacterCard key={character.firebaseKey} characterObj={character} graveyardName={graveyardDetails.name} onUpdate={viewGraveyardDetails} />
+      ))}
+      </div>
     </div>
+
   );
 }
-
-export default ShowGraveyard;

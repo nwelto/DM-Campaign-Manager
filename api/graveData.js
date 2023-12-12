@@ -20,6 +20,24 @@ const getGraveyard = (uid) => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
+const getDeadCharacters = () => new Promise((resolve, reject) => {
+  fetch(`${endpoint}/characters.json?orderBy="isDead"&equalTo=true`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      if (data) {
+        resolve(Object.values(data));
+      } else {
+        resolve([]);
+      }
+    })
+    .catch(reject);
+});
+
 const createGraveyard = (payload) => new Promise((resolve, reject) => {
   console.warn('Payload to creategraveyard', payload);
   fetch(`${endpoint}/graveyards.json`, {
@@ -118,4 +136,5 @@ export {
   favoriteGraveyard,
   getGraveyardCharacters,
   deleteSingleGraveyard,
+  getDeadCharacters,
 };
