@@ -60,7 +60,6 @@ function CampaignForm({ obj }) {
         />
       </FloatingLabel>
 
-      {/* IMAGE INPUT  */}
       <FloatingLabel controlId="floatingInput2" label="Campaign Image" className="mb-3">
         <Form.Control
           type="url"
@@ -72,7 +71,6 @@ function CampaignForm({ obj }) {
         />
       </FloatingLabel>
 
-      {/* SUBMIT BUTTON  */}
       <Button type="submit">{obj.firebaseKey ? 'Update' : 'Add'} Campaign</Button>
     </Form>
   );
