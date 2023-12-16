@@ -20,13 +20,18 @@ export default function ViewGraveyard() {
         <img src="/graveyard.png" alt="Graveyard" style={{ width: '100%', height: '200px' }} />
       </div>
       <div className="text-white ms-5 details">
-        <h5 style={{ fontSize: '3em' }}>{graveyardDetails.name} </h5>
+        <h5 style={{ fontSize: '3em' }}>{graveyardDetails.name}</h5>
       </div>
-      <div className="cardContainer d-flex flex-wrap">{graveyardDetails.characters?.map((character) => (
-        <CharacterCard key={character.firebaseKey} characterObj={character} graveyardName={graveyardDetails.name} onUpdate={viewGraveyardDetails} />
-      ))}
+      <div className="cardContainer d-flex flex-wrap">
+        {graveyardDetails.characters?.filter((character) => character.isDead).map((character) => (
+          <CharacterCard
+            key={character.firebaseKey}
+            characterObj={character}
+            graveyardName={graveyardDetails.name}
+            onUpdate={() => viewGraveyardDetails(firebaseKey).then(setGraveyardDetails)}
+          />
+        ))}
       </div>
     </div>
-
   );
 }

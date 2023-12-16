@@ -27,7 +27,7 @@ function ShowCampaigns() {
       <Button onClick={handleAddCampaign} variant="dark" className="signin-btn">Add A Campaign</Button>
       <div className="d-flex flex-wrap">
         {campaigns.map((campaign) => (
-          <CampaignCard key={campaign.firebaseKey} campaignObj={campaign} onUpdate={getAllCampaigns} />
+          <CampaignCard key={campaign.firebaseKey} campaignObj={campaign} onUpdate={getAllCampaigns} className="campaign-card-column" />
         ))}
       </div>
 
