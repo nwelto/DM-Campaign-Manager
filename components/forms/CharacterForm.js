@@ -70,6 +70,12 @@ function CharacterForm({ obj }) {
     }
   };
 
+  const dndClasses = [
+    'Barbarian', 'Bard', 'Cleric', 'Druid', 'Fighter',
+    'Monk', 'Paladin', 'Ranger', 'Rogue', 'Sorcerer',
+    'Warlock', 'Wizard',
+  ];
+
   return (
     <Form onSubmit={handleSubmit}>
       <h1 className="text-white mt-5">{obj.firebaseKey ? 'Update' : 'Add'} Character</h1>
@@ -83,6 +89,21 @@ function CharacterForm({ obj }) {
           onChange={handleChange}
           required
         />
+      </FloatingLabel>
+
+      <FloatingLabel controlId="floatingSelectClass" label="Class" className="mb-3">
+        <Form.Select
+          aria-label="Class"
+          name="class"
+          onChange={handleChange}
+          value={formInput.class}
+          required
+        >
+          <option value="">Select a Class</option>
+          {dndClasses.map((dndClass) => (
+            <option key={dndClass} value={dndClass}>{dndClass}</option>
+          ))}
+        </Form.Select>
       </FloatingLabel>
 
       <FloatingLabel controlId="floatingInput1" label="Name" className="mb-3">
@@ -113,17 +134,6 @@ function CharacterForm({ obj }) {
           aria-label="hp"
           name="hp"
           value={formInput.hp}
-          onChange={handleChange}
-          required
-        />
-      </FloatingLabel>
-
-      <FloatingLabel controlId="floatingTextarea" label="Class" className="mb-3">
-        <Form.Control
-          type="text"
-          aria-label="Class"
-          name="class"
-          value={formInput.class}
           onChange={handleChange}
           required
         />
