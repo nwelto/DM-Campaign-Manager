@@ -7,7 +7,6 @@ import CharacterCard from '../../components/CharacterCard';
 export default function ViewCampaigns() {
   const [campaignDetails, setCampaignDetails] = useState({});
   const router = useRouter();
-
   const { firebaseKey } = router.query;
 
   useEffect(() => {
@@ -15,18 +14,23 @@ export default function ViewCampaigns() {
   }, [firebaseKey]);
 
   return (
-    <div className="mt-5 d-flex flex-wrap">
-      <div className="d-flex flex-column">
+    <div className="container mt-5">
+      <div className="campaign-details mb-4 d-flex align-items-center">
         <img src={campaignDetails.image} alt={campaignDetails.name} style={{ width: '400px' }} />
+        <div className="text-white ms-5 details" style={{ flexShrink: 0 }}>
+          <h5 style={{ fontSize: '3em' }}>{campaignDetails.name}</h5>
+        </div>
       </div>
-      <div className="text-white ms-5 details">
-        <h5 style={{ fontSize: '3em' }}>{campaignDetails.name} </h5>
-      </div>
-      <div className="cardContainer d-flex flex-wrap">{campaignDetails.characters?.map((character) => (
-        <CharacterCard key={character.firebaseKey} characterObj={character} campaignName={campaignDetails.name} onUpdate={viewCampaignDetails} />
-      ))}
+      <div className="character-cards d-flex flex-wrap">
+        {campaignDetails.characters?.filter((character) => !character.isDead).map((character) => (
+          <CharacterCard
+            key={character.firebaseKey}
+            characterObj={character}
+            campaignName={campaignDetails.name}
+            onUpdate={() => viewCampaignDetails(firebaseKey).then(setCampaignDetails)}
+          />
+        ))}
       </div>
     </div>
-
   );
 }
