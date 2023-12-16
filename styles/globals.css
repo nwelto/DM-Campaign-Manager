@@ -72,3 +72,6 @@ background-color: black;
   max-width: 50%;
   padding: 10px; 
 }
+.character-card{
+  text-align: left;
+}

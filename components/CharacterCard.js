@@ -1,13 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
+import {
+  FaSkull, FaHeartbeat, FaEdit, FaTrashAlt, FaEye,
+} from 'react-icons/fa';
 import Link from 'next/link';
-import { FaSkull, FaHeartbeat } from 'react-icons/fa';
+import { Button } from 'react-bootstrap';
 import { deleteCharacter, updateCharacters } from '../api/characterData';
 
 function CharacterCard({ characterObj, onUpdate }) {
-  // Function to toggle the isDead status
   const toggleIsDead = () => {
     const updatedCharacter = {
       ...characterObj,
@@ -17,7 +18,6 @@ function CharacterCard({ characterObj, onUpdate }) {
     updateCharacters(updatedCharacter).then(() => onUpdate());
   };
 
-  // Function to delete the character
   const deleteThisCharacter = () => {
     if (window.confirm(`Delete ${characterObj.name}?`)) {
       deleteCharacter(characterObj.firebaseKey).then(() => onUpdate());
@@ -25,39 +25,33 @@ function CharacterCard({ characterObj, onUpdate }) {
   };
 
   return (
-    <Card style={{ width: '24rem', margin: '10px', position: 'relative' }}>
-      <Button
-        variant="link"
-        style={{
-          position: 'absolute', top: '10px', right: '10px', color: characterObj.isDead ? 'green' : 'red',
-        }}
-        onClick={toggleIsDead}
-      >
-        {characterObj.isDead ? <FaHeartbeat /> : <FaSkull />}
-      </Button>
+    <Card className="character-card" style={{ width: '24rem', margin: '10px', position: 'relative' }}>
+      <div style={{ position: 'absolute', top: '10px', right: '10px' }}>
+        <Link href={`/character/${characterObj.firebaseKey}`} passHref>
+          <FaEye style={{ color: 'gray', cursor: 'pointer', marginRight: '10px' }} />
+        </Link>
+        <Link href={`/character/edit/${characterObj.firebaseKey}`} passHref>
+          <FaEdit style={{ color: 'blue', cursor: 'pointer', marginRight: '10px' }} />
+        </Link>
+        <FaTrashAlt
+          style={{ color: 'red', cursor: 'pointer' }}
+          onClick={deleteThisCharacter}
+        />
+      </div>
       <Card.Body>
         <Card.Title>{characterObj.name}</Card.Title>
         <Card.Img variant="top" src={characterObj.image} alt={characterObj.name} style={{ height: '200px' }} />
         <h6>Class: {characterObj.class}</h6>
         <h6>AC: {characterObj.ac}</h6>
         <h6>HP: {characterObj.hp}</h6>
-        <div className="saves-section">
-          <h5>Saving Throws</h5>
-          <h6>STR: {characterObj.str}</h6>
-          <h6>DEX: {characterObj.dex}</h6>
-          <h6>CON: {characterObj.con}</h6>
-          <h6>INT: {characterObj.int}</h6>
-          <h6>WIS: {characterObj.wisdom}</h6>
-          <h6>CHA: {characterObj.cha}</h6>
-        </div>
-        <Link href={`/character/${characterObj.firebaseKey}`} passHref>
-          <Button variant="dark" className="m-2">VIEW</Button>
-        </Link>
-        <Link href={`/character/edit/${characterObj.firebaseKey}`} passHref>
-          <Button variant="dark">EDIT</Button>
-        </Link>
-        <Button variant="danger" onClick={deleteThisCharacter} className="m-2">
-          DELETE
+        <Button
+          variant="link"
+          style={{
+            color: characterObj.isDead ? 'green' : 'red',
+          }}
+          onClick={toggleIsDead}
+        >
+          {characterObj.isDead ? <FaHeartbeat /> : <FaSkull />}
         </Button>
       </Card.Body>
     </Card>

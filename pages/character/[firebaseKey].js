@@ -22,6 +22,8 @@ export default function ViewCharacters() {
         <h5>{characterDetails.name}</h5>
         <h6>Campaign: {characterDetails.campaignObj?.name}</h6>
         <h6>Class: {characterDetails.class}</h6>
+        <h6>AC: {characterDetails.ac}</h6>
+        <h6>HP: {characterDetails.hp}</h6>
         <div className="saves-section">
           <h5>Saving Throws</h5>
           <h6>STR: {characterDetails.str}</h6>
