@@ -82,7 +82,7 @@ function Home() {
               backgroundPosition: 'center',
               backgroundRepeat: 'no-repeat',
               backgroundColor: 'transparent',
-              width: '100%',
+              width: '99%',
               height: '500px',
               cursor: 'pointer',
             }}

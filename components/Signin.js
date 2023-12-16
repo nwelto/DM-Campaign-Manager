@@ -27,7 +27,7 @@ function Signin() {
     >
       <h1 style={{ color: 'white' }}>Welcome.</h1>
       <p style={{ color: 'white' }}>Please sign in to continue.</p>
-      <Button type="button" size="lg" className="signin-btn" onClick={handleSignIn}>
+      <Button variant="dark" type="button" size="lg" className="signin-btn" onClick={handleSignIn}>
         Sign In
       </Button>
     </div>

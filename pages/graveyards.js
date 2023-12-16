@@ -15,18 +15,21 @@ export default function ViewGraveyard() {
   }, [firebaseKey]);
 
   return (
-    <div className="mt-5 d-flex flex-wrap">
-      <div className="d-flex flex-column">
-        <img src="/graveyard.png" alt="Graveyard" style={{ width: '100%', height: '200px' }} />
+    <div className="container mt-5">
+      <div className="graveyard-details mb-4">
+        <img src="/graveyard.png" alt="Graveyard" style={{ width: '500px' }} />
+        <h5 className="text-white" style={{ fontSize: '3em' }}>{graveyardDetails.name}</h5>
       </div>
-      <div className="text-white ms-5 details">
-        <h5 style={{ fontSize: '3em' }}>{graveyardDetails.name} </h5>
-      </div>
-      <div className="cardContainer d-flex flex-wrap">{graveyardDetails.characters?.map((character) => (
-        <CharacterCard key={character.firebaseKey} characterObj={character} graveyardName={graveyardDetails.name} onUpdate={viewGraveyardDetails} />
-      ))}
+      <div className="character-cards d-flex flex-wrap">
+        {graveyardDetails.characters?.filter((character) => character.isDead).map((character) => (
+          <CharacterCard
+            key={character.firebaseKey}
+            characterObj={character}
+            graveyardName={graveyardDetails.name}
+            onUpdate={() => viewGraveyardDetails(firebaseKey).then(setGraveyardDetails)}
+          />
+        ))}
       </div>
     </div>
-
   );
 }

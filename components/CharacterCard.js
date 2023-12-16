@@ -3,9 +3,21 @@ import PropTypes from 'prop-types';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import Link from 'next/link';
-import { deleteCharacter } from '../api/characterData';
+import { FaSkull, FaHeartbeat } from 'react-icons/fa';
+import { deleteCharacter, updateCharacters } from '../api/characterData';
 
 function CharacterCard({ characterObj, onUpdate }) {
+  // Function to toggle the isDead status
+  const toggleIsDead = () => {
+    const updatedCharacter = {
+      ...characterObj,
+      isDead: !characterObj.isDead,
+    };
+
+    updateCharacters(updatedCharacter).then(() => onUpdate());
+  };
+
+  // Function to delete the character
   const deleteThisCharacter = () => {
     if (window.confirm(`Delete ${characterObj.name}?`)) {
       deleteCharacter(characterObj.firebaseKey).then(() => onUpdate());
@@ -13,7 +25,16 @@ function CharacterCard({ characterObj, onUpdate }) {
   };
 
   return (
-    <Card style={{ width: '24rem', margin: '10px' }}>
+    <Card style={{ width: '24rem', margin: '10px', position: 'relative' }}>
+      <Button
+        variant="link"
+        style={{
+          position: 'absolute', top: '10px', right: '10px', color: characterObj.isDead ? 'green' : 'red',
+        }}
+        onClick={toggleIsDead}
+      >
+        {characterObj.isDead ? <FaHeartbeat /> : <FaSkull />}
+      </Button>
       <Card.Body>
         <Card.Title>{characterObj.name}</Card.Title>
         <Card.Img variant="top" src={characterObj.image} alt={characterObj.name} style={{ height: '200px' }} />
@@ -58,6 +79,7 @@ CharacterCard.propTypes = {
     wisdom: PropTypes.number,
     cha: PropTypes.number,
     firebaseKey: PropTypes.string,
+    isDead: PropTypes.bool,
   }).isRequired,
   onUpdate: PropTypes.func.isRequired,
 };
