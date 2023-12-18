@@ -4,7 +4,9 @@ DM Campaign Manager is a comprehensive tool designed for Dungeons and Dragons en
 
 #Wireframe: https://dbdiagram.io/d/Campaign-Manager-64f357bc02bd1c4a5eda08b8
 
-#Data Flow Chart: ![Alt text](image.png)
+#Data Flow Chart: 
+
+![Alt text](image.png)
 
 
 #Intended Audience
