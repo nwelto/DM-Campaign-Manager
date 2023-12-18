@@ -19,6 +19,18 @@ const getCharacter = (uid) => new Promise((resolve, reject) => {
     })
     .catch(reject);
 });
+const toggleIsDeadStatus = (firebaseKey, newIsDeadStatus) => new Promise((resolve, reject) => {
+  fetch(`${endpoint}/characters/${firebaseKey}.json`, {
+    method: 'PATCH',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ isDead: newIsDeadStatus }),
+  })
+    .then((response) => response.json())
+    .then((data) => resolve(data))
+    .catch(reject);
+});
 
 const createCharacter = (payload) => new Promise((resolve, reject) => {
   console.warn('Payload to createCharacter', payload);
@@ -93,5 +105,6 @@ export {
   deleteCharacter,
   updateCharacters,
   favoriteCharacters,
+  toggleIsDeadStatus,
 
 };

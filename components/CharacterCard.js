@@ -6,16 +6,13 @@ import {
 } from 'react-icons/fa';
 import Link from 'next/link';
 import { Button } from 'react-bootstrap';
-import { deleteCharacter, updateCharacters } from '../api/characterData';
+import { deleteCharacter, toggleIsDeadStatus } from '../api/characterData';
 
 function CharacterCard({ characterObj, onUpdate }) {
-  const toggleIsDead = () => {
-    const updatedCharacter = {
-      ...characterObj,
-      isDead: !characterObj.isDead,
-    };
-
-    updateCharacters(updatedCharacter).then(() => onUpdate());
+  const handleToggleIsDead = () => {
+    toggleIsDeadStatus(characterObj.firebaseKey, !characterObj.isDead)
+      .then(() => onUpdate())
+      .catch((error) => console.error('Error toggling isDead status:', error));
   };
 
   const deleteThisCharacter = () => {
@@ -25,22 +22,34 @@ function CharacterCard({ characterObj, onUpdate }) {
   };
 
   return (
-    <Card className="character-card" style={{ width: '24rem', margin: '10px', position: 'relative' }}>
+    <Card style={{ width: '24rem', margin: '10px', position: 'relative' }}>
+      <Card.Img variant="top" src={characterObj.image} alt={characterObj.name} style={{ height: '350px' }} />
       <div style={{ position: 'absolute', top: '10px', right: '10px' }}>
         <Link href={`/character/${characterObj.firebaseKey}`} passHref>
-          <FaEye style={{ color: 'gray', cursor: 'pointer', marginRight: '10px' }} />
+          <span>
+            <FaEye style={{
+              color: 'white', cursor: 'pointer', marginRight: '10px', fontSize: '1.5rem', backgroundColor: 'black', borderRadius: '50%', padding: '5px',
+            }}
+            />
+          </span>
         </Link>
         <Link href={`/character/edit/${characterObj.firebaseKey}`} passHref>
-          <FaEdit style={{ color: 'blue', cursor: 'pointer', marginRight: '10px' }} />
+          <span>
+            <FaEdit style={{
+              color: 'white', cursor: 'pointer', marginRight: '10px', fontSize: '1.5rem', backgroundColor: 'black', borderRadius: '50%', padding: '5px',
+            }}
+            />
+          </span>
         </Link>
         <FaTrashAlt
-          style={{ color: 'red', cursor: 'pointer' }}
+          style={{
+            color: 'white', cursor: 'pointer', fontSize: '1.5rem', backgroundColor: 'black', borderRadius: '50%', padding: '5px',
+          }}
           onClick={deleteThisCharacter}
         />
       </div>
       <Card.Body>
         <Card.Title>{characterObj.name}</Card.Title>
-        <Card.Img variant="top" src={characterObj.image} alt={characterObj.name} style={{ height: '200px' }} />
         <h6>Class: {characterObj.class}</h6>
         <h6>AC: {characterObj.ac}</h6>
         <h6>HP: {characterObj.hp}</h6>
@@ -49,7 +58,7 @@ function CharacterCard({ characterObj, onUpdate }) {
           style={{
             color: characterObj.isDead ? 'green' : 'red',
           }}
-          onClick={toggleIsDead}
+          onClick={handleToggleIsDead}
         >
           {characterObj.isDead ? <FaHeartbeat /> : <FaSkull />}
         </Button>
