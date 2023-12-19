@@ -81,9 +81,9 @@ function CharacterForm({ obj }) {
   };
 
   const dndClasses = [
-    'Barbarian', 'Bard', 'Cleric', 'Druid', 'Fighter',
-    'Monk', 'Paladin', 'Ranger', 'Rogue', 'Sorcerer',
-    'Warlock', 'Wizard',
+    'Artificer', 'Barbarian', 'Bard', 'Cleric', 'Druid',
+    'Fighter', 'Monk', 'Paladin', 'Ranger', 'Rogue',
+    'Sorcerer', 'Warlock', 'Wizard',
   ];
 
   return (
