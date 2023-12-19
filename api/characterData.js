@@ -1,4 +1,4 @@
-import { clientCredentials } from '../utils/client';
+import { clientCredentials, storage } from '../utils/client';
 
 const endpoint = clientCredentials.databaseURL;
 
@@ -97,7 +97,26 @@ const favoriteCharacters = (uid) => new Promise((resolve, reject) => {
     })
     .catch(reject);
 });
+const uploadFileToStorage = (uid, file, onProgress) => new Promise((resolve, reject) => {
+  const uploadTask = storage.ref(`users/${uid}/${file.name}`).put(file);
 
+  uploadTask.on(
+    'state_changed',
+    (snapshot) => {
+      const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+      onProgress(progress);
+    },
+    (error) => {
+      console.error('Error during upload:', error);
+      reject(error);
+    },
+    () => {
+      uploadTask.snapshot.ref.getDownloadURL().then((downloadURL) => {
+        resolve(downloadURL);
+      });
+    },
+  );
+});
 export {
   getCharacter,
   createCharacter,
@@ -106,5 +125,5 @@ export {
   updateCharacters,
   favoriteCharacters,
   toggleIsDeadStatus,
-
+  uploadFileToStorage,
 };

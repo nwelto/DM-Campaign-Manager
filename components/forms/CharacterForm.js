@@ -5,7 +5,7 @@ import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import Form from 'react-bootstrap/Form';
 import { Button } from 'react-bootstrap';
 import { useAuth } from '../../utils/context/authContext';
-import { createCharacter, updateCharacters } from '../../api/characterData';
+import { createCharacter, updateCharacters, uploadFileToStorage } from '../../api/characterData';
 import { getCampaign } from '../../api/campaignData';
 
 const initialState = {
@@ -30,12 +30,12 @@ const initialState = {
 function CharacterForm({ obj }) {
   const [formInput, setFormInput] = useState(initialState);
   const [campaigns, setCampaigns] = useState([]);
+  const [uploadProgress, setUploadProgress] = useState(0);
   const router = useRouter();
   const { user } = useAuth();
 
   useEffect(() => {
     getCampaign(user.uid).then(setCampaigns);
-
     if (obj.firebaseKey) setFormInput(obj);
   }, [obj, user]);
 
@@ -45,27 +45,47 @@ function CharacterForm({ obj }) {
       ...prevState,
       [name]: value,
     }));
+  };
 
-    if (name === 'campaign_id') {
+  const handleImageChange = (e) => {
+    if (e.target.files[0]) {
       setFormInput((prevState) => ({
         ...prevState,
-        campaign_id: value,
+        image: e.target.files[0],
       }));
     }
   };
 
-  const handleSubmit = (e) => {
-    console.warn('handlesubmit triggered');
+  const handleSubmit = async (e) => {
     e.preventDefault();
+
+    // Convert numeric fields to numbers
+    const numericFields = ['ac', 'hp', 'str', 'dex', 'con', 'int', 'wisdom', 'cha', 'passive_perception', 'investigation', 'insight'];
+    const convertedInput = { ...formInput };
+    numericFields.forEach((field) => {
+      if (convertedInput[field]) {
+        convertedInput[field] = Number(convertedInput[field]);
+      }
+    });
+
+    if (convertedInput.image && convertedInput.image instanceof File) {
+      try {
+        setUploadProgress(0);
+        const imageUrl = await uploadFileToStorage(user.uid, convertedInput.image, setUploadProgress);
+        convertedInput.image = imageUrl;
+      } catch (error) {
+        console.error('Error uploading file:', error);
+        return;
+      }
+    }
+
+    const payload = { ...convertedInput, uid: user.uid };
     if (obj.firebaseKey) {
-      updateCharacters(formInput).then(() => router.back());
+      updateCharacters(payload).then(() => router.back());
     } else {
-      const payload = { ...formInput, uid: user.uid };
       createCharacter(payload).then(({ name }) => {
         const patchPayload = { firebaseKey: name };
-        updateCharacters(patchPayload).then(() => {
-          router.back();
-        });
+        updateCharacters(patchPayload).then(() => router.back());
       });
     }
   };
@@ -80,15 +100,15 @@ function CharacterForm({ obj }) {
     <Form onSubmit={handleSubmit}>
       <h1 className="text-white mt-5">{obj.firebaseKey ? 'Update' : 'Add'} Character</h1>
 
-      <FloatingLabel controlId="floatingInput2" label="Character Image" className="mb-3">
+      <FloatingLabel controlId="floatingInputImage" label="Character Image" className="mb-3">
         <Form.Control
-          type="url"
-          aria-label="Enter an image url"
+          type="file"
+          aria-label="Upload an image"
           name="image"
-          value={formInput.image}
-          onChange={handleChange}
-          required
+          onChange={handleImageChange}
+          required={!obj.firebaseKey}
         />
+        {uploadProgress > 0 && <div>Upload Progress: {uploadProgress}%</div>}
       </FloatingLabel>
 
       <FloatingLabel controlId="floatingSelectClass" label="Class" className="mb-3">
