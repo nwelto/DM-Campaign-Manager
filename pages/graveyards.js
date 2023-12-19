@@ -1,18 +1,26 @@
 /* eslint-disable @next/next/no-img-element */
-import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
-import { viewGraveyardDetails } from '../api/mergedData';
+import { useRouter } from 'next/router';
 import CharacterCard from '../components/CharacterCard';
+import { useAuth } from '../utils/context/authContext';
+import { viewGraveyardDetails } from '../api/mergedData';
 
 export default function ViewGraveyard() {
   const [graveyardDetails, setGraveyardDetails] = useState({});
   const router = useRouter();
+  const { user } = useAuth(); // Use the useAuth hook to get the current user
 
   const { firebaseKey } = router.query;
 
   useEffect(() => {
-    viewGraveyardDetails(firebaseKey).then(setGraveyardDetails);
-  }, [firebaseKey]);
+    if (user?.uid) {
+      viewGraveyardDetails(firebaseKey).then((data) => {
+        // Filter the characters by the user's UID
+        const userCharacters = data.characters?.filter((character) => character.uid === user.uid && character.isDead);
+        setGraveyardDetails({ ...data, characters: userCharacters });
+      });
+    }
+  }, [user, firebaseKey]);
 
   return (
     <div className="container mt-5">
@@ -23,12 +31,15 @@ export default function ViewGraveyard() {
         </div>
       </div>
       <div className="character-cards d-flex flex-wrap">
-        {graveyardDetails.characters?.filter((character) => character.isDead).map((character) => (
+        {graveyardDetails.characters?.map((character) => (
           <CharacterCard
             key={character.firebaseKey}
             characterObj={character}
             graveyardName="Graveyard"
-            onUpdate={() => viewGraveyardDetails(firebaseKey).then(setGraveyardDetails)}
+            onUpdate={() => viewGraveyardDetails(firebaseKey).then((data) => {
+              const userCharacters = data.characters?.filter((char) => char.uid === user.uid && char.isDead);
+              setGraveyardDetails({ ...data, characters: userCharacters });
+            })}
           />
         ))}
       </div>
