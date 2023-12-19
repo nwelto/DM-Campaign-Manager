@@ -58,28 +58,18 @@ function CharacterForm({ obj }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    // Convert numeric fields to numbers
-    const numericFields = ['ac', 'hp', 'str', 'dex', 'con', 'int', 'wisdom', 'cha', 'passive_perception', 'investigation', 'insight'];
-    const convertedInput = { ...formInput };
-    numericFields.forEach((field) => {
-      if (convertedInput[field]) {
-        convertedInput[field] = Number(convertedInput[field]);
-      }
-    });
-
-    if (convertedInput.image && convertedInput.image instanceof File) {
+    if (formInput.image && formInput.image instanceof File) {
       try {
         setUploadProgress(0);
-        const imageUrl = await uploadFileToStorage(user.uid, convertedInput.image, setUploadProgress);
-        convertedInput.image = imageUrl;
+        const imageUrl = await uploadFileToStorage(user.uid, formInput.image, setUploadProgress);
+        formInput.image = imageUrl;
       } catch (error) {
         console.error('Error uploading file:', error);
         return;
       }
     }
 
-    const payload = { ...convertedInput, uid: user.uid };
+    const payload = { ...formInput, uid: user.uid };
     if (obj.firebaseKey) {
       updateCharacters(payload).then(() => router.back());
     } else {
