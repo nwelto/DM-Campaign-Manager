@@ -60,12 +60,12 @@ function CharacterForm({ obj }) {
     e.preventDefault();
     if (formInput.image && formInput.image instanceof File) {
       try {
-        setUploadProgress(0);
+        setUploadProgress(0); // Reset progress on new upload
         const imageUrl = await uploadFileToStorage(user.uid, formInput.image, setUploadProgress);
         formInput.image = imageUrl;
       } catch (error) {
         console.error('Error uploading file:', error);
-        return;
+        return; // Exit the function if upload fails
       }
     }
 
@@ -79,10 +79,9 @@ function CharacterForm({ obj }) {
       });
     }
   };
-
   const dndClasses = [
-    'Artificer', 'Barbarian', 'Bard', 'Cleric', 'Druid',
-    'Fighter', 'Monk', 'Paladin', 'Ranger', 'Rogue',
+    'Artificer', 'Barbarian', 'Bard', 'Blood Hunter', 'Cleric', 'Druid',
+    'Fighter', 'Gunslinger', 'Monk', 'Paladin', 'Ranger', 'Rogue',
     'Sorcerer', 'Warlock', 'Wizard',
   ];
 
