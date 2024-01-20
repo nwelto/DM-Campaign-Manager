@@ -26,13 +26,15 @@ function CampaignForm({ obj }) {
 
   const handleChange = (e) => {
     const { name, value, files } = e.target;
-    if (name === 'image' && files.length) {
-      setImageFile(files[0]);
-    } else {
-      setFormInput((prevState) => ({
-        ...prevState,
-        [name]: value,
-      }));
+    if (typeof window !== 'undefined') {
+      if (name === 'image' && files.length) {
+        setImageFile(files[0]);
+      } else {
+        setFormInput((prevState) => ({
+          ...prevState,
+          [name]: value,
+        }));
+      }
     }
   };
 
