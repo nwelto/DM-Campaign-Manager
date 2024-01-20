@@ -24,6 +24,23 @@ function CharacterCard({ characterObj, onUpdate }) {
   return (
     <Card style={{ width: '24rem', margin: '10px', position: 'relative' }}>
       <Card.Img variant="top" src={characterObj.image} alt={characterObj.name} style={{ height: '350px' }} />
+
+      <div style={{
+        position: 'absolute',
+        top: '10px',
+        left: '5px',
+        color: 'white',
+        textShadow: '2px 2px 3px black, -2px -2px 3px black, 2px -2px 3px black, -2px 2px 3px black',
+      }}
+      >
+        <h5 style={{ margin: 0, fontWeight: 'bold', fontSize: '1.1rem' }}>
+          {characterObj.name}
+        </h5>
+        <p style={{ margin: 0, fontWeight: 'bold', fontSize: '1rem' }}>
+          {characterObj.class}
+        </p>
+      </div>
+
       <div style={{ position: 'absolute', top: '10px', right: '10px' }}>
         <Link href={`/character/${characterObj.firebaseKey}`} passHref>
           <span>
@@ -48,9 +65,8 @@ function CharacterCard({ characterObj, onUpdate }) {
           onClick={deleteThisCharacter}
         />
       </div>
+
       <Card.Body>
-        <Card.Title>{characterObj.name}</Card.Title>
-        <h6>Class: {characterObj.class}</h6>
         <h6>AC: {characterObj.ac}</h6>
         <h6>HP: {characterObj.hp}</h6>
         <Button
@@ -71,16 +87,9 @@ CharacterCard.propTypes = {
   characterObj: PropTypes.shape({
     image: PropTypes.string,
     name: PropTypes.string,
-    notes: PropTypes.string,
     class: PropTypes.string,
     ac: PropTypes.number,
     hp: PropTypes.number,
-    str: PropTypes.number,
-    dex: PropTypes.number,
-    con: PropTypes.number,
-    int: PropTypes.number,
-    wisdom: PropTypes.number,
-    cha: PropTypes.number,
     firebaseKey: PropTypes.string,
     isDead: PropTypes.bool,
   }).isRequired,
