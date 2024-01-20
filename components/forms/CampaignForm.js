@@ -15,8 +15,8 @@ const initialState = {
 
 function CampaignForm({ obj }) {
   const [formInput, setFormInput] = useState(initialState);
-  const [imageFile, setImageFile] = useState(null); // New state for image file
-  const [uploadProgress, setUploadProgress] = useState(0); // Optional: for upload progress
+  const [imageFile, setImageFile] = useState(null);
+  const [uploadProgress, setUploadProgress] = useState(0);
   const router = useRouter();
   const { user } = useAuth();
 
