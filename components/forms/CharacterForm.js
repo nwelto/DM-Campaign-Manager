@@ -34,6 +34,10 @@ function CharacterForm({ obj }) {
   const router = useRouter();
   const { user } = useAuth();
 
+  const handleScroll = (e) => {
+    e.target.blur();
+  };
+
   useEffect(() => {
     getCampaign(user.uid).then(setCampaigns);
     if (obj.firebaseKey) setFormInput(obj);
@@ -41,9 +45,10 @@ function CharacterForm({ obj }) {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
+    const isNumericField = ['ac', 'hp', 'str', 'dex', 'con', 'int', 'wisdom', 'cha', 'passive_perception', 'investigation', 'insight'].includes(name);
     setFormInput((prevState) => ({
       ...prevState,
-      [name]: value,
+      [name]: isNumericField ? Number(value) : value,
     }));
   };
 
@@ -58,18 +63,30 @@ function CharacterForm({ obj }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (formInput.image && formInput.image instanceof File) {
+
+    // Convert numeric values just before submission
+    const numericFields = ['ac', 'hp', 'str', 'dex', 'con', 'int', 'wisdom', 'cha', 'passive_perception', 'investigation', 'insight'];
+    const convertedInput = { ...formInput };
+    numericFields.forEach((field) => {
+      if (convertedInput[field]) {
+        convertedInput[field] = Number(convertedInput[field]);
+      }
+    });
+
+    // Handle image upload
+    if (convertedInput.image && convertedInput.image instanceof File) {
       try {
         setUploadProgress(0); // Reset progress on new upload
-        const imageUrl = await uploadFileToStorage(user.uid, formInput.image, setUploadProgress);
-        formInput.image = imageUrl;
+        const imageUrl = await uploadFileToStorage(user.uid, convertedInput.image, setUploadProgress);
+        convertedInput.image = imageUrl;
       } catch (error) {
         console.error('Error uploading file:', error);
         return; // Exit the function if upload fails
       }
     }
 
-    const payload = { ...formInput, uid: user.uid };
+    // Create or update the character with converted input
+    const payload = { ...convertedInput, uid: user.uid };
     if (obj.firebaseKey) {
       updateCharacters(payload).then(() => router.back());
     } else {
@@ -122,6 +139,7 @@ function CharacterForm({ obj }) {
           name="name"
           value={formInput.name}
           onChange={handleChange}
+          onWheel={handleScroll}
           required
         />
       </FloatingLabel>
@@ -133,6 +151,7 @@ function CharacterForm({ obj }) {
           type="number"
           value={formInput.ac}
           onChange={handleChange}
+          onWheel={handleScroll}
           required
         />
       </FloatingLabel>
@@ -144,6 +163,7 @@ function CharacterForm({ obj }) {
           name="hp"
           value={formInput.hp}
           onChange={handleChange}
+          onWheel={handleScroll}
           required
         />
       </FloatingLabel>
@@ -155,6 +175,7 @@ function CharacterForm({ obj }) {
           name="str"
           value={formInput.str}
           onChange={handleChange}
+          onWheel={handleScroll}
           required
         />
       </FloatingLabel>
@@ -166,6 +187,7 @@ function CharacterForm({ obj }) {
           name="dex"
           value={formInput.dex}
           onChange={handleChange}
+          onWheel={handleScroll}
           required
         />
       </FloatingLabel>
@@ -177,6 +199,7 @@ function CharacterForm({ obj }) {
           name="con"
           value={formInput.con}
           onChange={handleChange}
+          onWheel={handleScroll}
           required
         />
       </FloatingLabel>
@@ -188,6 +211,7 @@ function CharacterForm({ obj }) {
           name="int"
           value={formInput.int}
           onChange={handleChange}
+          onWheel={handleScroll}
           required
         />
       </FloatingLabel>
@@ -199,6 +223,7 @@ function CharacterForm({ obj }) {
           name="wisdom"
           value={formInput.wisdom}
           onChange={handleChange}
+          onWheel={handleScroll}
           required
         />
       </FloatingLabel>
@@ -210,6 +235,7 @@ function CharacterForm({ obj }) {
           name="cha"
           value={formInput.cha}
           onChange={handleChange}
+          onWheel={handleScroll}
           required
         />
       </FloatingLabel>
@@ -221,6 +247,7 @@ function CharacterForm({ obj }) {
           name="passive_perception"
           value={formInput.passive_perception}
           onChange={handleChange}
+          onWheel={handleScroll}
           required
         />
       </FloatingLabel>
@@ -232,6 +259,7 @@ function CharacterForm({ obj }) {
           name="investigation"
           value={formInput.investigation}
           onChange={handleChange}
+          onWheel={handleScroll}
           required
         />
       </FloatingLabel>
@@ -243,6 +271,7 @@ function CharacterForm({ obj }) {
           name="insight"
           value={formInput.insight}
           onChange={handleChange}
+          onWheel={handleScroll}
           required
         />
       </FloatingLabel>
@@ -280,8 +309,8 @@ function CharacterForm({ obj }) {
         </Form.Select>
       </FloatingLabel>
 
-      {/* SUBMIT BUTTON  */}
-      <Button type="submit">{obj.firebaseKey ? 'Update' : 'Add'} Character </Button>
+      {/* Submit button */}
+      <Button type="submit">{obj.firebaseKey ? 'Update' : 'Add'} Character</Button>
     </Form>
   );
 }
