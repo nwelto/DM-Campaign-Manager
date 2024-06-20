@@ -53,7 +53,7 @@ function CharacterForm({ obj }) {
   };
 
   const handleImageChange = (e) => {
-    if (e.target.files[0]) {
+    if (typeof window !== 'undefined' && e.target.files[0]) {
       setFormInput((prevState) => ({
         ...prevState,
         image: e.target.files[0],
@@ -74,7 +74,7 @@ function CharacterForm({ obj }) {
     });
 
     // Handle image upload
-    if (convertedInput.image && convertedInput.image instanceof File) {
+    if (typeof window !== 'undefined' && convertedInput.image && convertedInput.image instanceof File) {
       try {
         setUploadProgress(0); // Reset progress on new upload
         const imageUrl = await uploadFileToStorage(user.uid, convertedInput.image, setUploadProgress);
@@ -96,6 +96,7 @@ function CharacterForm({ obj }) {
       });
     }
   };
+
   const dndClasses = [
     'Artificer', 'Barbarian', 'Bard', 'Blood Hunter', 'Cleric', 'Druid',
     'Fighter', 'Gunslinger', 'Monk', 'Paladin', 'Ranger', 'Rogue',
@@ -317,7 +318,7 @@ function CharacterForm({ obj }) {
 
 CharacterForm.propTypes = {
   obj: PropTypes.shape({
-    image: PropTypes.string,
+    image: PropTypes.oneOfType([PropTypes.string, PropTypes.instanceOf(typeof window !== 'undefined' && window.File)]),
     name: PropTypes.string,
     notes: PropTypes.string,
     class: PropTypes.string,

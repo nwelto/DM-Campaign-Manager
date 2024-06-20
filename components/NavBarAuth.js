@@ -3,7 +3,7 @@
 import React from 'react';
 import Link from 'next/link';
 import {
-  Navbar, Container, Nav, Button, NavDropdown,
+  Navbar, Container, Nav, Button,
 } from 'react-bootstrap';
 import { signOut } from '../utils/auth';
 
@@ -26,22 +26,12 @@ export default function NavBarAuth() {
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="me-auto">
-            <NavDropdown title="Characters" id="nav-dropdown-characters" className="custom-dropdown">
-              <Link href="/characters" passHref>
-                <NavDropdown.Item as="a">View Characters</NavDropdown.Item>
-              </Link>
-              <Link href="/character/new" passHref>
-                <NavDropdown.Item as="a">New Character</NavDropdown.Item>
-              </Link>
-            </NavDropdown>
-            <NavDropdown title="Campaigns" id="nav-dropdown-campaigns" className="custom-dropdown">
-              <Link href="/campaigns" passHref>
-                <NavDropdown.Item as="a">View Campaigns</NavDropdown.Item>
-              </Link>
-              <Link href="/campaign/new" passHref>
-                <NavDropdown.Item as="a">New Campaign</NavDropdown.Item>
-              </Link>
-            </NavDropdown>
+            <Link href="/characters" passHref>
+              <Nav.Link as="a">Characters</Nav.Link>
+            </Link>
+            <Link href="/campaigns" passHref>
+              <Nav.Link as="a">Campaigns</Nav.Link>
+            </Link>
             <Link href="/graveyards" passHref>
               <Nav.Link as="a">Graveyard</Nav.Link>
             </Link>
