@@ -287,26 +287,19 @@ function CharacterForm({ obj }) {
         />
       </FloatingLabel>
 
-      <FloatingLabel controlId="floatingSelect" label="campaign">
+      <FloatingLabel controlId="floatingSelect" label="Campaign" className="mb-3">
         <Form.Select
-          aria-label="campaign"
+          aria-label="Campaign"
           name="campaign_id"
           onChange={handleChange}
-          className="mb-3"
           value={formInput.campaign_id}
-          required
         >
-          <option value="">Select A campaign</option>
-          {
-            campaigns.map((campaign) => (
-              <option
-                key={campaign.firebaseKey}
-                value={campaign.firebaseKey}
-              >
-                {campaign.name}
-              </option>
-            ))
-          }
+          <option value="">Select a Campaign</option>
+          {campaigns.map((campaign) => (
+            <option key={campaign.firebaseKey} value={campaign.firebaseKey}>
+              {campaign.name}
+            </option>
+          ))}
         </Form.Select>
       </FloatingLabel>
 
@@ -334,6 +327,7 @@ CharacterForm.propTypes = {
     passive_perception: PropTypes.number,
     investigation: PropTypes.number,
     insight: PropTypes.number,
+    campaign_id: PropTypes.string,
   }),
 };
 
