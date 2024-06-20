@@ -97,7 +97,7 @@ function CampaignForm({ obj }) {
 
 CampaignForm.propTypes = {
   obj: PropTypes.shape({
-    image: PropTypes.oneOfType([PropTypes.string, PropTypes.instanceOf(File)]),
+    image: PropTypes.oneOfType([PropTypes.string, PropTypes.instanceOf(typeof window !== 'undefined' && window.File)]),
     name: PropTypes.string,
     firebaseKey: PropTypes.string,
   }),
